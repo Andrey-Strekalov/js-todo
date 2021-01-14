@@ -1,4 +1,4 @@
-var tasksList = [
+const tasksList = [
   { id: "1", text: "выучить html", completed: true },
   { id: "2", text: "выучить css", completed: true },
   { id: "3", text: "выучить js", completed: false },
@@ -35,9 +35,9 @@ function createListItem(task) {
 }
 
 function renderTask(tasks) {
-  let ul = document.querySelector("ul");
+  const ul = document.querySelector("ul");
   for (let task of tasksList) {
-    let li = createListItem(task);
+    const li = createListItem(task);
     ul.appendChild(li);
   }
 }
