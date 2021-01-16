@@ -1,4 +1,4 @@
-const tasksList = [];
+let tasksList = [];
 
 function createListItem(task) {
   const div = document.createElement("div");
@@ -14,6 +14,7 @@ function createListItem(task) {
 
   const btn = document.createElement("button");
   btn.className = "destroy";
+  btn.onclick = deleteTask;
 
   div.appendChild(input);
   div.appendChild(label);
@@ -57,4 +58,11 @@ function addNewTask() {
   });
   renderTask();
   input.value = "";
+}
+
+function deleteTask(event) {
+  let id = event.target.parentNode.parentNode.id;
+  let newTasksList = tasksList.filter((task) => task.id !== id);
+  tasksList = newTasksList;
+  renderTask(tasksList);
 }
