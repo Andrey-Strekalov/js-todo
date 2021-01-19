@@ -69,14 +69,10 @@ function deleteTask(event) {
 }
 
 function toggleTask(event) {
-  let li = event.target.parentNode.parentNode;
-  let newTasksList = tasksList.map((task) => {
-    if (task.id === li.id) {
-      return { id: li.id, text: task.text, completed: !task.completed };
-    }
-    return task;
-  });
+  const li = event.target.parentNode.parentNode;
+  let newTasksList = tasksList.map((task) =>
+    task.id !== li.id ? task : { ...task, completed: !task.completed }
+  );
   tasksList = newTasksList;
   renderTask(tasksList);
-  console.log(tasksList);
 }
