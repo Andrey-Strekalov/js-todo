@@ -8,6 +8,7 @@ function createListItem(task) {
   input.className = "toggle";
   input.type = "checkbox";
   input.checked = task.completed;
+  input.onclick = toggleTask;
 
   const label = document.createElement("label");
   label.innerHTML = task.text;
@@ -63,6 +64,15 @@ function addNewTask() {
 function deleteTask(event) {
   let id = event.target.parentNode.parentNode.id;
   let newTasksList = tasksList.filter((task) => task.id !== id);
+  tasksList = newTasksList;
+  renderTask(tasksList);
+}
+
+function toggleTask(event) {
+  const li = event.target.parentNode.parentNode;
+  let newTasksList = tasksList.map((task) =>
+    task.id !== li.id ? task : { ...task, completed: !task.completed }
+  );
   tasksList = newTasksList;
   renderTask(tasksList);
 }
