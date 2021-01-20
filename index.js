@@ -68,11 +68,19 @@ function deleteTask(event) {
   renderTask(tasksList);
 }
 
+function countActiveTasks() {
+  let strong = document.querySelector("strong");
+  let term = tasksList.filter((task) => !task.completed).length;
+  strong.innerHTML = term;
+}
+
 function toggleTask(event) {
   const li = event.target.parentNode.parentNode;
   let newTasksList = tasksList.map((task) =>
     task.id !== li.id ? task : { ...task, completed: !task.completed }
   );
   tasksList = newTasksList;
+  countActiveTasks();
   renderTask(tasksList);
 }
+
