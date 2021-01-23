@@ -59,21 +59,20 @@ function addNewTask() {
   });
   renderTask();
   input.value = "";
-  countActiveTasks()
+  countActiveTasks();
 }
 
 function deleteTask(event) {
   let id = event.target.parentNode.parentNode.id;
   let newTasksList = tasksList.filter((task) => task.id !== id);
   tasksList = newTasksList;
-  countActiveTasks()
   renderTask(tasksList);
 }
 
 function countActiveTasks() {
   const strong = document.querySelector("strong");
-  let activeTaskNumber = tasksList.filter((task) => !task.completed).length;
-  strong.innerHTML = activeTaskNumber;
+  let term = tasksList.filter((task) => !task.completed).length;
+  strong.innerHTML = term;
 }
 
 function toggleTask(event) {
@@ -86,3 +85,8 @@ function toggleTask(event) {
   renderTask(tasksList);
 }
 
+function clearCompleted() {
+  let newTaskList = tasksList.filter(task => !task.completed)
+  tasksList = newTaskList;
+  renderTask(tasksList);
+}
