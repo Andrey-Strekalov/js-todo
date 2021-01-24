@@ -28,6 +28,12 @@ function createListItem(task) {
   return li;
 }
 
+function countActiveTasks() {
+  const strong = document.querySelector("strong");
+  let term = tasksList.filter((task) => !task.completed).length;
+  strong.innerHTML = term;
+}
+
 function renderTask(tasks) {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
@@ -35,6 +41,7 @@ function renderTask(tasks) {
     const li = createListItem(task);
     ul.appendChild(li);
   }
+  countActiveTasks();
 }
 
 renderTask(tasksList);
@@ -59,7 +66,6 @@ function addNewTask() {
   });
   renderTask();
   input.value = "";
-  countActiveTasks();
 }
 
 function deleteTask(event) {
@@ -69,10 +75,10 @@ function deleteTask(event) {
   renderTask(tasksList);
 }
 
-function countActiveTasks() {
-  const strong = document.querySelector("strong");
-  let term = tasksList.filter((task) => !task.completed).length;
-  strong.innerHTML = term;
+function toggleDisplayBtn() {
+  const btn = document.querySelector(".clear-completed");
+  const completedTasks = tasksList.filter((task) => task.completed == true);
+  completedTasks.length > 0 ? btn.style.display = "block" : { ...btn.style.display = "none"}
 }
 
 function toggleTask(event) {
@@ -81,12 +87,13 @@ function toggleTask(event) {
     task.id !== li.id ? task : { ...task, completed: !task.completed }
   );
   tasksList = newTasksList;
-  countActiveTasks();
   renderTask(tasksList);
+  toggleDisplayBtn()
 }
 
 function clearCompleted() {
-  let newTaskList = tasksList.filter(task => !task.completed)
+  let newTaskList = tasksList.filter((task) => !task.completed);
   tasksList = newTaskList;
   renderTask(tasksList);
+  toggleDisplayBtn()
 }
