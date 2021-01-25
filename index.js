@@ -77,8 +77,8 @@ function deleteTask(event) {
 
 function toggleDisplayBtn() {
   const btn = document.querySelector(".clear-completed");
-  const completedTasks = tasksList.filter((task) => task.completed == true);
-  completedTasks.length > 0 ? btn.style.display = "block" : { ...btn.style.display = "none"}
+  const completedTasks = tasksList.filter((task) => task.completed);
+  btn.style.display = completedTasks.length > 0 ? "block" : "none";
 }
 
 function toggleTask(event) {
@@ -88,12 +88,12 @@ function toggleTask(event) {
   );
   tasksList = newTasksList;
   renderTask(tasksList);
-  toggleDisplayBtn()
+  toggleDisplayBtn();
 }
 
 function clearCompleted() {
   let newTaskList = tasksList.filter((task) => !task.completed);
   tasksList = newTaskList;
   renderTask(tasksList);
-  toggleDisplayBtn()
+  toggleDisplayBtn();
 }
