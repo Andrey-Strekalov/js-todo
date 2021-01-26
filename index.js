@@ -37,7 +37,7 @@ function countActiveTasks() {
 function renderTask(tasks) {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
-  for (let task of tasksList) {
+  for (let task of tasks) {
     const li = createListItem(task);
     ul.appendChild(li);
   }
@@ -64,7 +64,7 @@ function addNewTask() {
     text: input.value,
     completed: false,
   });
-  renderTask();
+  renderTask(tasksList);
   input.value = "";
 }
 
@@ -96,4 +96,18 @@ function clearCompleted() {
   tasksList = newTaskList;
   renderTask(tasksList);
   toggleDisplayBtn();
+}
+
+function filterAll() {
+  renderTask(tasksList);
+}
+
+function filterCompleted() {
+  let newTasksList = tasksList.filter((task) => task.completed);
+  renderTask(newTasksList);
+}
+
+function filterActive() {
+  let newTasksList = tasksList.filter((task) => !task.completed);
+  renderTask(newTasksList);
 }
