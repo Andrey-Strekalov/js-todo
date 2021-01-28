@@ -1,5 +1,7 @@
 let tasksList = [];
 
+checkFooter ()
+
 function createListItem(task) {
   const div = document.createElement("div");
   div.className = "view";
@@ -42,6 +44,7 @@ function renderTask(tasks) {
     ul.appendChild(li);
   }
   countActiveTasks();
+  checkFooter ()
 }
 
 renderTask(tasksList);
@@ -66,6 +69,7 @@ function addNewTask() {
   });
   renderTask(tasksList);
   input.value = "";
+  checkFooter ()
 }
 
 function deleteTask(event) {
@@ -73,6 +77,7 @@ function deleteTask(event) {
   let newTasksList = tasksList.filter((task) => task.id !== id);
   tasksList = newTasksList;
   renderTask(tasksList);
+  checkFooter ()
 }
 
 function toggleDisplayBtn() {
@@ -96,6 +101,7 @@ function clearCompleted() {
   tasksList = newTaskList;
   renderTask(tasksList);
   toggleDisplayBtn();
+  checkFooter ()
 }
 
 function filterAll() {
@@ -103,11 +109,16 @@ function filterAll() {
 }
 
 function filterCompleted() {
-  let newTasksList = tasksList.filter((task) => task.completed);
+  const newTasksList = tasksList.filter((task) => task.completed);
   renderTask(newTasksList);
 }
 
 function filterActive() {
-  let newTasksList = tasksList.filter((task) => !task.completed);
+  const newTasksList = tasksList.filter((task) => !task.completed);
   renderTask(newTasksList);
+}
+
+function checkFooter () {
+  const footer = document.querySelector("footer");
+  footer.style.display = tasksList.length == 0 ? "none" : "block";
 }
