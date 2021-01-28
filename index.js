@@ -1,6 +1,14 @@
 let tasksList = [];
 
-checkFooter ()
+function addLocalStorage() {
+  localStorage.setItem("task", JSON.stringify(tasksList));
+}
+
+if (localStorage.getItem("task")) {
+  tasksList = JSON.parse(localStorage.getItem("task"));
+}
+
+checkFooter();
 
 function createListItem(task) {
   const div = document.createElement("div");
@@ -42,9 +50,10 @@ function renderTask(tasks) {
   for (let task of tasks) {
     const li = createListItem(task);
     ul.appendChild(li);
+    addLocalStorage(task);
   }
   countActiveTasks();
-  checkFooter ()
+  checkFooter();
 }
 
 renderTask(tasksList);
@@ -69,7 +78,7 @@ function addNewTask() {
   });
   renderTask(tasksList);
   input.value = "";
-  checkFooter ()
+  checkFooter();
 }
 
 function deleteTask(event) {
@@ -77,7 +86,7 @@ function deleteTask(event) {
   let newTasksList = tasksList.filter((task) => task.id !== id);
   tasksList = newTasksList;
   renderTask(tasksList);
-  checkFooter ()
+  checkFooter();
 }
 
 function toggleDisplayBtn() {
@@ -101,7 +110,7 @@ function clearCompleted() {
   tasksList = newTaskList;
   renderTask(tasksList);
   toggleDisplayBtn();
-  checkFooter ()
+  checkFooter();
 }
 
 function filterAll() {
@@ -118,7 +127,7 @@ function filterActive() {
   renderTask(newTasksList);
 }
 
-function checkFooter () {
+function checkFooter() {
   const footer = document.querySelector("footer");
   footer.style.display = tasksList.length == 0 ? "none" : "block";
 }
