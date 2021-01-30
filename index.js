@@ -131,3 +131,15 @@ function checkFooter() {
   const footer = document.querySelector("footer");
   footer.style.display = tasksList.length == 0 ? "none" : "block";
 }
+
+function checkFilter() {
+  const hash = window.location.hash;
+  if (hash == "#/all") {
+    filterAll();
+  } else if (hash == "#/active") {
+    filterActive();
+  } else if (hash == "#/completed") {
+    filterCompleted();
+  }
+}
+checkFilter();
