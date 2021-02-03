@@ -1,5 +1,7 @@
 let tasksList = [];
 
+/* загружаем задачи в localStorage */
+
 function addLocalStorage() {
   localStorage.setItem("task", JSON.stringify(tasksList));
 }
@@ -9,6 +11,8 @@ if (localStorage.getItem("task")) {
 }
 
 checkFooter();
+
+/* Создаем новую задачу */
 
 function createListItem(task) {
   const div = document.createElement("div");
@@ -38,11 +42,15 @@ function createListItem(task) {
   return li;
 }
 
+/* Считаем активные задачи */
+
 function countActiveTasks() {
   const strong = document.querySelector("strong");
   let term = tasksList.filter((task) => !task.completed).length;
   strong.innerHTML = term;
 }
+
+/* Рендерим массив задач */
 
 function renderTask(tasks) {
   const ul = document.querySelector("ul");
@@ -58,6 +66,8 @@ function renderTask(tasks) {
 
 renderTask(tasksList);
 
+/* Ищем максимальный id в массиве */
+
 function getID() {
   let id;
   if (tasksList.length === 0) {
@@ -68,6 +78,8 @@ function getID() {
   }
   return String(id);
 }
+
+/* Добавляем задачу */
 
 function addNewTask() {
   let input = document.getElementById("newTask");
@@ -81,6 +93,8 @@ function addNewTask() {
   checkFooter();
 }
 
+/* Удаляем задачу */
+
 function deleteTask(event) {
   let id = event.target.parentNode.parentNode.id;
   let newTasksList = tasksList.filter((task) => task.id !== id);
@@ -89,11 +103,15 @@ function deleteTask(event) {
   checkFooter();
 }
 
+/* Отображаем или скрываем кнопку clear completed */
+
 function toggleDisplayBtn() {
   const btn = document.querySelector(".clear-completed");
   const completedTasks = tasksList.filter((task) => task.completed);
   btn.style.display = completedTasks.length > 0 ? "block" : "none";
 }
+
+/* Смена статуса задачи*/
 
 function toggleTask(event) {
   const li = event.target.parentNode.parentNode;
@@ -105,6 +123,8 @@ function toggleTask(event) {
   toggleDisplayBtn();
 }
 
+/* Удаляем выполненные задачи*/
+
 function clearCompleted() {
   let newTaskList = tasksList.filter((task) => !task.completed);
   tasksList = newTaskList;
@@ -113,24 +133,36 @@ function clearCompleted() {
   checkFooter();
 }
 
+/* Фильтры */
+
+      /* все задачи */
+
 function filterAll() {
   renderTask(tasksList);
 }
+
+      /* выполненные задачи */
 
 function filterCompleted() {
   const newTasksList = tasksList.filter((task) => task.completed);
   renderTask(newTasksList);
 }
 
+      /* активные задачи */
+
 function filterActive() {
   const newTasksList = tasksList.filter((task) => !task.completed);
   renderTask(newTasksList);
 }
 
+ /* Отображаем или скрываем футер в зависимости от наличия задач */
+
 function checkFooter() {
   const footer = document.querySelector("footer");
   footer.style.display = tasksList.length == 0 ? "none" : "block";
 }
+
+ /* Сохраняем выбранный фильтр после перезагрузки страницы */
 
 function checkFilter() {
   const hash = window.location.hash;
