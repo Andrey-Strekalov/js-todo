@@ -37,6 +37,9 @@ function createListItem(task) {
   const li = document.createElement("li");
   li.setAttribute("id", task.id);
   li.appendChild(div);
+  if(task.completed){
+    li.className = "completed"
+  }
 
   return li;
 }
