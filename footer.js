@@ -6,6 +6,7 @@ function toggleDisplayBtn() {
   btn.style.display = completedTasks.length > 0 ? "block" : "none";
 }
 
+toggleDisplayBtn()
 
 /* Удаляем выполненные задачи*/
 

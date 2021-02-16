@@ -31,4 +31,5 @@ function deleteTask(event) {
   tasksList = newTasksList;
   renderTask(tasksList);
   checkFooter();
+  toggleDisplayBtn()
 }
