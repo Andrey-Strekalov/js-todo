@@ -10,7 +10,6 @@ if (localStorage.getItem("task")) {
   tasksList = JSON.parse(localStorage.getItem("task"));
 }
 
-
 /* Создаем новую задачу */
 
 function createListItem(task) {
@@ -37,8 +36,8 @@ function createListItem(task) {
   const li = document.createElement("li");
   li.setAttribute("id", task.id);
   li.appendChild(div);
-  if(task.completed){
-    li.className = "completed"
+  if (task.completed) {
+    li.className = "completed";
   }
 
   return li;
@@ -49,6 +48,7 @@ function createListItem(task) {
 function renderTask(tasks) {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
+  localStorage.clear();
   for (let task of tasks) {
     const li = createListItem(task);
     ul.appendChild(li);
