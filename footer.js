@@ -24,7 +24,8 @@ function clearCompleted() {
 
 function filterAll() {
   renderTask(tasksList);
-  toggleFilterClass();
+  const FilterValue = document.getElementById("all").getAttribute("href");
+  toggleFilterClass(FilterValue);
 }
 
 /* выполненные задачи */
@@ -32,7 +33,8 @@ function filterAll() {
 function filterCompleted() {
   const newTasksList = tasksList.filter((task) => task.completed);
   renderTask(newTasksList);
-  toggleFilterClass();
+  const FilterValue = document.getElementById("completed").getAttribute("href");
+  toggleFilterClass(FilterValue);
 }
 
 /* активные задачи */
@@ -40,14 +42,19 @@ function filterCompleted() {
 function filterActive() {
   const newTasksList = tasksList.filter((task) => !task.completed);
   renderTask(newTasksList);
-  toggleFilterClass();
+  const FilterValue = document.getElementById("active").getAttribute("href");
+  toggleFilterClass(FilterValue);
 }
 
 /* Отображаем или скрываем футер в зависимости от наличия задач */
 
 function checkFooter() {
   const footer = document.querySelector("footer");
-  footer.style.display = tasksList.length == 0 ? "none" : "block";
+  if (localStorage.getItem("task") !== 0) {
+    footer.style.display = "block"
+  } else{
+    footer.style.display = "none"
+  }
 }
 
 /* Сохраняем выбранный фильтр после перезагрузки страницы */
@@ -61,18 +68,18 @@ function checkFilter() {
   } else if (hash == "#/completed") {
     filterCompleted();
   }
+  toggleFilterClass(hash);
 }
-checkFilter();
-checkFooter();
 
-function toggleFilterClass() {
+function toggleFilterClass(href) {
   document.querySelectorAll(".FilterBtn").forEach((link) => {
-    if (link.getAttribute("href") !== window.location.hash) {
-      link.classList.remove("selected");
-    } else {
+    if (link.getAttribute("href") == href) {
       link.classList.add("selected");
+    } else {
+      link.classList.remove("selected");
     }
   });
 }
 
-toggleFilterClass();
+checkFilter();
+checkFooter();

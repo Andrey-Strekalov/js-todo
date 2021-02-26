@@ -27,16 +27,16 @@
           <ul class="todo-list"></ul>
         </section>
         <footer class="footer" style="display: block">
-          <span class="todo-count"><strong>1</strong> item left</span>
+          <span class="todo-count"><strong></strong> item left</span>
           <ul class="filters">
             <li>
-              <a href="#/"  onclick="filterAll(), toggleFilterClass()" class="FilterBtn">All</a>
+              <a href="#/"  onclick="filterAll()" class="FilterBtn" id="all">All</a>
             </li>
             <li>
-              <a href="#/active" onclick="filterActive(), toggleFilterClass()" class="FilterBtn">Active</a>
+              <a href="#/active" onclick="filterActive()" class="FilterBtn" id="active">Active</a>
             </li>
             <li>
-              <a href="#/completed" onclick="filterCompleted(), toggleFilterClass()" class="FilterBtn">Completed</a>
+              <a href="#/completed" onclick="filterCompleted()" class="FilterBtn" id="completed">Completed</a>
             </li>
           </ul>
           <button class="clear-completed" style="display: none" onclick="clearCompleted()" id="All">clear completed</button>

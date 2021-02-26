@@ -32,4 +32,5 @@ function deleteTask(event) {
   renderTask(tasksList);
   checkFooter();
   toggleDisplayBtn()
+  checkFilter();
 }
