@@ -21,6 +21,7 @@ function addNewTask() {
   renderTask(tasksList);
   input.value = "";
   checkFooter();
+  filterAll()
 }
 
 /* Удаляем задачу */

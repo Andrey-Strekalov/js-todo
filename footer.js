@@ -14,7 +14,9 @@ function clearCompleted() {
   let newTaskList = tasksList.filter((task) => !task.completed);
   tasksList = newTaskList;
   renderTask(tasksList);
-  toggleDisplayBtn();
+  toggleDisplayBtn(); 
+  filterAll()
+  checkLocalStorage();
   checkFooter();
 }
 
@@ -50,7 +52,7 @@ function filterActive() {
 
 function checkFooter() {
   const footer = document.querySelector("footer");
-  if (localStorage.getItem("task") !== 0) {
+  if (localStorage.getItem("task") !== null) {
     footer.style.display = "block"
   } else{
     footer.style.display = "none"

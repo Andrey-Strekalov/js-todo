@@ -43,12 +43,19 @@ function createListItem(task) {
   return li;
 }
 
+function checkLocalStorage() {
+  localStorage.clear();
+  for (let task of tasksList) {
+    addLocalStorage(task);
+  }
+}
+
 /* Рендерим массив задач */
 
 function renderTask(tasks) {
   const ul = document.querySelector("ul");
   ul.innerHTML = "";
-  localStorage.clear();
+  checkLocalStorage();
   for (let task of tasks) {
     const li = createListItem(task);
     ul.appendChild(li);
