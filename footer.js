@@ -15,9 +15,9 @@ function clearCompleted() {
   tasksList = newTaskList;
   renderTask(tasksList);
   toggleDisplayBtn(); 
-  filterAll()
   checkLocalStorage();
   checkFooter();
+  checkFilter()
 }
 
 /* Фильтры */
