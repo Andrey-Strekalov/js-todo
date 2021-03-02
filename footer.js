@@ -26,7 +26,7 @@ function clearCompleted() {
 
 function filterAll() {
   renderTask(tasksList);
-  const FilterValue = document.getElementById("all").getAttribute("href");
+  const filterValue = document.getElementById("all").getAttribute("href");
   toggleFilterClass(FilterValue);
 }
 
