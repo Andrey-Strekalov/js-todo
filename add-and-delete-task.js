@@ -21,6 +21,7 @@ function addNewTask() {
   renderTask(tasksList);
   input.value = "";
   checkFooter();
+  filterAll()
 }
 
 /* Удаляем задачу */
@@ -32,4 +33,5 @@ function deleteTask(event) {
   renderTask(tasksList);
   checkFooter();
   toggleDisplayBtn()
+  checkFilter();
 }
